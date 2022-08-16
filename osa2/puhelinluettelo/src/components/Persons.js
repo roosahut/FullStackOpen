@@ -11,7 +11,7 @@ const Person = ({ person }) => {
       return (
         <div>
           {persons.map(person =>
-            <Person key={person.name} person={person} />
+            <Person key={person.id} person={person} />
             )}
         </div>
       )
@@ -22,7 +22,7 @@ const Person = ({ person }) => {
         return (
           <div>
             {filteredPersons.map(person =>
-              <Person key={person.name} person={person} />
+              <Person key={person.id} person={person} />
               )}
           </div>
         )
