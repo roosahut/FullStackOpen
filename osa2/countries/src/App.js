@@ -6,7 +6,7 @@ const Country = ({ country, handleSelected }) => {
     <div>
       {country.name.common}
       <div>
-        <button value={country.name.common} onClick={handleSelected} >show</button>
+        <button onClick={() => handleSelected(country)} >show</button>
       </div>
     </div >
   )
@@ -27,11 +27,10 @@ const Countries = ({ countries, search, selected, handleSelected }) => {
     )
 
   } else if (selected.length !== 0) {
-    const countryObject = countries.filter(country => country.name.common.indexOf(selected) !== -1)
-    //console.log(countryObject)
+
     return (
       <div>
-        <ShowCountry country={countryObject[0]} />
+        <ShowCountry country={selected} />
       </div>
     )
 
@@ -56,11 +55,24 @@ const Language = ({ language }) => {
 
 const ShowCountry = ({ country }) => {
   const languages = Object.values(country.languages)
+  const [weather, setWeather] = useState(null)
   //console.log(languages)
   //console.log(country)
+
+  useEffect(() => {
+    const api_key = process.env.REACT_APP_API_KEY
+    axios
+      .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=${api_key}&units=metric`)
+      .then(response => {
+        //console.log('fulfilled')
+        setWeather(response.data)
+      })
+  }, [])
+
+  console.log(weather)
   return (
     <div>
-      <h2>{country.name.common}</h2>
+      <h1>{country.name.common}</h1>
       <p>capital {country.capital}</p>
       <p>area {country.area}</p>
       <h3>languages:</h3>
@@ -74,6 +86,10 @@ const ShowCountry = ({ country }) => {
         height='150px'
         alt='flag'
       />
+      <h2>Weather in {country.capital}</h2>
+      <p>temperature {weather?.main.temp ?? ''} Celsius</p>
+      <p>wind {weather?.wind.speed ?? ''} m/s</p>
+      {weather?.weather ? <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}></img> : <p>Loading...</p>}
     </div>
   )
 }
@@ -98,9 +114,9 @@ const App = () => {
     setSelected([])
   }
 
-  const handleSelected = (event) => {
+  const handleSelected = (country) => {
     //console.log(event.target.value)
-    setSelected(event.target.value)
+    setSelected(country)
   }
 
   return (
