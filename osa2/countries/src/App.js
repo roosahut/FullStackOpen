@@ -4,12 +4,10 @@ import axios from 'axios'
 const Country = ({ country, handleSelected }) => {
   return (
     <div>
-      <p>
-        {country.name.common}
-        <div>
-          <button value={country.name.common} onClick={handleSelected} >show</button>
-        </div>
-      </p>
+      {country.name.common}
+      <div>
+        <button value={country.name.common} onClick={handleSelected} >show</button>
+      </div>
     </div >
   )
 }
