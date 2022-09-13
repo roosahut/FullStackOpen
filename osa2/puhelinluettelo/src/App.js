@@ -14,8 +14,8 @@ const App = () => {
   useEffect(() => {
     personService
       .getAll()
-      .then(response => {
-        setPersons(response.data)
+      .then(phonebook => {
+        setPersons(phonebook)
       })
   }, [])
 
@@ -33,20 +33,29 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
+    const nameObject = {
+      name: newName,
+      number: newNumber
+    }
 
     if (persons.map(person => person.name).indexOf(newName) !== -1) {
-      alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number?`)) {
+        const personId = persons[(persons.map(person => person.name).indexOf(newName))].id
 
-    } else {
-      const nameObject = {
-        name: newName,
-        number: newNumber,
+        personService
+          .updateNumber(personId, nameObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
       }
+    } else {
 
       personService
         .create(nameObject)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+        .then(number => {
+          setPersons(persons.concat(number))
           setNewName('')
           setNewNumber('')
         })
@@ -54,9 +63,15 @@ const App = () => {
   }
 
   const deletePerson = (person) => {
+    const personId = person.id
     if (window.confirm(`Do you want to delete ${person.name} from the phonebook?`)) {
       personService
-        .deleteId(person.id)
+        .deleteId(personId)
+        .then(returnedPersons => {
+          setPersons(returnedPersons)
+          setNewName('')
+          setNewNumber('')
+        })
     }
   }
 
