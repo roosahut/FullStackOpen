@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 import personService from './services/persons'
 
 
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     personService
@@ -48,6 +50,10 @@ const App = () => {
             setPersons(persons.map(person => person.id !== personId ? person : returnedPerson))
             setNewName('')
             setNewNumber('')
+            setNotification(`${newName} number changed`)
+            setTimeout(() => {
+              setNotification(null)
+            }, 2000)
           })
       }
     } else {
@@ -58,19 +64,26 @@ const App = () => {
           setPersons(persons.concat(number))
           setNewName('')
           setNewNumber('')
+          setNotification(`${newName} added`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 2000)
         })
     }
   }
 
   const deletePerson = (person) => {
-    const personId = person.id
+
     if (window.confirm(`Do you want to delete ${person.name} from the phonebook?`)) {
       personService
-        .deleteId(personId)
-        .then(returnedPersons => {
-          setPersons(returnedPersons)
-          setNewName('')
-          setNewNumber('')
+        .deleteId(person.id)
+        .then(() => {
+          setPersons(oldPersons => oldPersons.filter(({ id }) => id !== person.id))
+          setNotification(`${person.name
+            } deleted`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 2000)
         })
     }
   }
@@ -78,6 +91,8 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+
+      <Notification message={notification} />
 
       <Filter value={newFilter} handleChange={handleNewFilter} />
 
