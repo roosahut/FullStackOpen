@@ -63,6 +63,7 @@ const App = () => {
             setTimeout(() => {
               setError(null)
             }, 5000)
+            setPersons(oldPersons => oldPersons.filter(({ id }) => id !== personId))
           })
       }
     } else {
