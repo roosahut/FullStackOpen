@@ -3,6 +3,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Notification from './components/Notification'
+import Error from './components/Error'
 import personService from './services/persons'
 
 
@@ -12,6 +13,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
   const [notification, setNotification] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     personService
@@ -55,6 +57,13 @@ const App = () => {
               setNotification(null)
             }, 2000)
           })
+          .catch(error => {
+            console.log('fail')
+            setError(`${newName} was already deleted from the server`)
+            setTimeout(() => {
+              setError(null)
+            }, 5000)
+          })
       }
     } else {
 
@@ -93,6 +102,7 @@ const App = () => {
       <h1>Phonebook</h1>
 
       <Notification message={notification} />
+      <Error message={error} />
 
       <Filter value={newFilter} handleChange={handleNewFilter} />
 
