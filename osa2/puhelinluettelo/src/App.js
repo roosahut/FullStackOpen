@@ -58,8 +58,8 @@ const App = () => {
             }, 2000)
           })
           .catch(error => {
-            console.log('fail')
-            setError(`${newName} was already deleted from the server`)
+            console.log(error.response.data)
+            setError(`${error.response.data}`)
             setTimeout(() => {
               setError(null)
             }, 5000)
@@ -78,6 +78,13 @@ const App = () => {
           setTimeout(() => {
             setNotification(null)
           }, 2000)
+        })
+        .catch(error => {
+          console.log(error.response.data)
+          setError(`${error.response.data.error}`)
+          setTimeout(() => {
+            setError(null)
+          }, 5000)
         })
     }
   }
