@@ -94,19 +94,47 @@ const App = () => {
     }
 
     blogService
-      .update(id, changedBlog)
+      .update(id, changedBlog, blog.user.name)
       .then(returnedBlog => {
         setBlogs(blogs.map(blog => blog.id !== id ? blog : returnedBlog))
+        setNotification(`${blog.title} liked`)
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000)
       })
       .catch(error => {
         setErrorMessage(
-          `Error with liking the blog`
+          'error with liking the blog'
         )
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
         setBlogs(blogs.filter(n => n.id !== id))
       })
+  }
+
+  const deleteBlog = id => {
+    const blog = blogs.find(n => n.id === id)
+
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      blogService
+        .deleteBlog(id)
+        .then(() => {
+          setBlogs(oldBlogs => oldBlogs.filter(({ id }) => id !== blog.id))
+          setNotification(`${blog.title} deleted`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
+        })
+        .catch(error => {
+          setErrorMessage(
+            'error deleting the blog'
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        })
+    }
   }
 
   const loginForm = () => (
@@ -151,9 +179,11 @@ const App = () => {
             <BlogForm createBlog={addBlog} />
           </Togglable>
           <h2>Blogs</h2>
-          {blogs.map(blog =>
+          {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
             <Blog key={blog.id} blog={blog}
-              changeLikes={() => changeLikesOf(blog.id)} />
+              user={user}
+              changeLikes={() => changeLikesOf(blog.id)}
+              deleteBlog={() => deleteBlog(blog.id)} />
           )}
         </div>
       }
