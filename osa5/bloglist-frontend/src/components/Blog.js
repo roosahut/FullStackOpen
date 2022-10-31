@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, changeLikes }) => {
   const [state, changeState] = useState(false)
 
   const blogStyle = {
@@ -26,7 +26,7 @@ const Blog = ({ blog }) => {
     <div>
       <p>{blog.url}</p>
       <p>likes: {blog.likes}
-        <button>like</button>
+        <button onClick={changeLikes}>like</button>
       </p>
       <p>{blog.user.name}</p>
     </div>
