@@ -43,7 +43,7 @@ const App = () => {
           setNotification(null)
         }, 5000)
       })
-      .catch(error => {
+      .catch(() => {
         setErrorMessage('new blog has to have the title and the url')
         setTimeout(() => {
           setErrorMessage(null)
@@ -102,7 +102,7 @@ const App = () => {
           setNotification(null)
         }, 5000)
       })
-      .catch(error => {
+      .catch(() => {
         setErrorMessage(
           'error with liking the blog'
         )
@@ -126,7 +126,7 @@ const App = () => {
             setNotification(null)
           }, 5000)
         })
-        .catch(error => {
+        .catch(() => {
           setErrorMessage(
             'error deleting the blog'
           )
