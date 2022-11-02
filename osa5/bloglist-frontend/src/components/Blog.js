@@ -41,11 +41,11 @@ const Blog = ({ blog, user, changeLikes, deleteBlog }) => {
   )
 
   return (
-    <div style={blogStyle}>
+    <li className='blog' style={blogStyle}>
       {blog.title} {blog.author}
       <button onClick={changeShowStatus}>{label}</button>
       {state === true ? showRest() : null}
-    </div >
+    </li >
   )
 }
 
