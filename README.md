@@ -10,3 +10,5 @@
 [Part 3](https://github.com/roosahut/FullStackOpen-part3) (eri repositiossa)
 
 [Part 4](https://github.com/roosahut/FullStackOpen/tree/master/osa4/bloglist)
+
+[Part 5](https://github.com/roosahut/FullStackOpen/tree/master/osa5/bloglist-frontend)
