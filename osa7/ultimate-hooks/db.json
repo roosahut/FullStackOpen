@@ -1,0 +1,169 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "custom hooks are awesome"
+    },
+    {
+      "id": 2,
+      "content": "best feature ever <3"
+    },
+    {
+      "content": "pöö",
+      "id": 3
+    },
+    {
+      "content": "moikk",
+      "id": 4
+    },
+    {
+      "content": "njyug",
+      "id": 5
+    },
+    {
+      "content": "njyug",
+      "id": 6
+    },
+    {
+      "content": "moi",
+      "id": 7
+    },
+    {
+      "content": "ja",
+      "id": 8
+    },
+    {
+      "content": "ja",
+      "id": 9
+    },
+    {
+      "content": "olen tyhäm",
+      "id": 10
+    },
+    {
+      "content": "olen tyhäm",
+      "id": 11
+    },
+    {
+      "content": "heippa",
+      "id": 12
+    },
+    {
+      "content": "ööh",
+      "id": 13
+    },
+    {
+      "content": "heippaa",
+      "id": 14
+    },
+    {
+      "content": "heippaa",
+      "id": 15
+    },
+    {
+      "content": "heippaa",
+      "id": 16
+    },
+    {
+      "content": "moro",
+      "id": 17
+    }
+  ],
+  "persons": [
+    {
+      "id": 1,
+      "name": "Matti Luukkainen",
+      "number": "040-12344565"
+    },
+    {
+      "id": 2,
+      "name": "Tarja Halonen",
+      "number": "040-2223334"
+    },
+    {
+      "name": "moi",
+      "number": "moi",
+      "id": 3
+    },
+    {
+      "name": "kakka",
+      "number": "je",
+      "id": 4
+    },
+    {
+      "name": "kakka",
+      "number": "je",
+      "id": 5
+    },
+    {
+      "name": "kakka",
+      "number": "jeiu2f",
+      "id": 6
+    },
+    {
+      "name": "kakka",
+      "number": "jeiu2f",
+      "id": 7
+    },
+    {
+      "name": "kakka",
+      "number": "jeiu2f",
+      "id": 8
+    },
+    {
+      "name": "mitä",
+      "number": "jhei",
+      "id": 9
+    },
+    {
+      "name": "mitä",
+      "number": "jhei",
+      "id": 10
+    },
+    {
+      "name": "mitä",
+      "number": "jhei",
+      "id": 11
+    },
+    {
+      "name": "hei",
+      "number": "ppa",
+      "id": 12
+    },
+    {
+      "name": "dfre",
+      "number": "fer",
+      "id": 13
+    },
+    {
+      "name": "dfre",
+      "number": "fer",
+      "id": 14
+    },
+    {
+      "name": "dfre",
+      "number": "fer",
+      "id": 15
+    },
+    {
+      "name": "rosita",
+      "number": "hattunen",
+      "id": 16
+    },
+    {
+      "name": "rosita",
+      "number": "hattunenijrfiure",
+      "id": 17
+    },
+    {
+      "name": "fc",
+      "number": "sdc",
+      "id": 18
+    },
+    {
+      "name": "mur",
+      "number": "kjäh",
+      "id": 19
+    }
+  ]
+}
