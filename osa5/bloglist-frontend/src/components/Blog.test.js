@@ -7,7 +7,7 @@ import Blog from './Blog'
 test('renders title and author', () => {
   const blog = {
     title: 'Rendering test title',
-    author: 'Testaaja'
+    author: 'Testaaja',
   }
 
   render(<Blog blog={blog} />)
@@ -25,12 +25,12 @@ test('shows url, likes and user, when view is clicked', async () => {
     likes: 2,
     user: {
       id: 1,
-      name: 'Testaaja 2'
-    }
+      name: 'Testaaja 2',
+    },
   }
   const userObject = {
     id: 23,
-    name: 'Tester'
+    name: 'Tester',
   }
 
   render(<Blog blog={blog} user={userObject} />)
@@ -55,19 +55,17 @@ test('if likes is pressed twice changeLikes is called twice', async () => {
     likes: 2,
     user: {
       id: 1,
-      name: 'Testaaja 2'
-    }
+      name: 'Testaaja 2',
+    },
   }
   const userObject = {
     id: 23,
-    name: 'Tester'
+    name: 'Tester',
   }
 
   const mockHandler = jest.fn()
 
-  render(
-    <Blog blog={blog} user={userObject} changeLikes={mockHandler} />
-  )
+  render(<Blog blog={blog} user={userObject} changeLikes={mockHandler} />)
 
   const user = userEvent.setup()
   const viewButton = screen.getByText('view')

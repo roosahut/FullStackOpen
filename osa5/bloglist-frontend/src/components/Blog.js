@@ -9,7 +9,7 @@ const Blog = ({ blog, user, changeLikes, deleteBlog }) => {
     paddingLeft: 2,
     border: 'solid',
     borderWidth: 1,
-    marginBottom: 5
+    marginBottom: 5,
   }
 
   const changeShowStatus = () => {
@@ -20,13 +20,13 @@ const Blog = ({ blog, user, changeLikes, deleteBlog }) => {
     }
   }
 
-  const label = state
-    ? 'hide' : 'view'
+  const label = state ? 'hide' : 'view'
 
   const showRest = () => (
     <div>
       <p>{blog.url}</p>
-      <p>likes: {blog.likes}
+      <p>
+        likes: {blog.likes}
         <button onClick={changeLikes}>like</button>
       </p>
       {blog.user.name}
@@ -41,11 +41,11 @@ const Blog = ({ blog, user, changeLikes, deleteBlog }) => {
   )
 
   return (
-    <li className='blog' style={blogStyle}>
+    <li className="blog" style={blogStyle}>
       {blog.title} {blog.author}
       <button onClick={changeShowStatus}>{label}</button>
       {state === true ? showRest() : null}
-    </li >
+    </li>
   )
 }
 
@@ -53,7 +53,7 @@ Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   changeLikes: PropTypes.func.isRequired,
-  deleteBlog: PropTypes.func.isRequired
+  deleteBlog: PropTypes.func.isRequired,
 }
 
 export default Blog

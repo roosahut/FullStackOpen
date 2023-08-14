@@ -4,7 +4,7 @@ describe('Blog app', function () {
     const user = {
       name: 'Testaaja',
       username: 'tester',
-      password: 'testi'
+      password: 'testi',
     }
     cy.request('POST', 'http://localhost:3003/api/users', user)
     cy.visit('http://localhost:3000')
@@ -63,7 +63,11 @@ describe('Blog app', function () {
     })
 
     it('User who created the blog can delete it', function () {
-      cy.createBlog({ title: 'first blog', author: 'first blogger', url: 'firstblog.com' })
+      cy.createBlog({
+        title: 'first blog',
+        author: 'first blogger',
+        url: 'firstblog.com',
+      })
 
       cy.contains('view').click()
 
@@ -74,9 +78,24 @@ describe('Blog app', function () {
 
     describe('when there are more blogs', function () {
       beforeEach(function () {
-        cy.createBlog({ title: 'first blog', author: 'first blogger', url: 'firstblog.com', likes: 3 })
-        cy.createBlog({ title: 'second blog', author: 'second blogger', url: 'secondblog.com', likes: 2 })
-        cy.createBlog({ title: 'third blog', author: 'third blogger', url: 'thirdblog.com', likes: 0 })
+        cy.createBlog({
+          title: 'first blog',
+          author: 'first blogger',
+          url: 'firstblog.com',
+          likes: 3,
+        })
+        cy.createBlog({
+          title: 'second blog',
+          author: 'second blogger',
+          url: 'secondblog.com',
+          likes: 2,
+        })
+        cy.createBlog({
+          title: 'third blog',
+          author: 'third blogger',
+          url: 'thirdblog.com',
+          likes: 0,
+        })
       })
       it('blogs are sorted by the amount of likes', function () {
         cy.get('.blog').eq(0).should('contain', 'first blog')

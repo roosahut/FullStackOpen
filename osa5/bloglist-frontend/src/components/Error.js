@@ -3,11 +3,7 @@ const Error = ({ message }) => {
     return null
   }
 
-  return (
-    <div className="error">
-      {message}
-    </div>
-  )
+  return <div className="error">{message}</div>
 }
 
 export default Error
