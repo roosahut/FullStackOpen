@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 
 import Blog from './components/Blog'
 import Notification from './components/Notification'
@@ -9,13 +10,16 @@ import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
+import { createNotification } from './reducers/notificationReducer'
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [notification, setNotification] = useState(null)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
@@ -36,12 +40,7 @@ const App = () => {
       .create(blogObject)
       .then((returnedBlog) => {
         setBlogs(blogs.concat(returnedBlog))
-        setNotification(
-          `a new blog ${blogObject.title} by ${blogObject.author} added`
-        )
-        setTimeout(() => {
-          setNotification(null)
-        }, 5000)
+        dispatch(createNotification(`a new blog ${blogObject.title} by ${blogObject.author} added`))
       })
       .catch(() => {
         setErrorMessage('new blog has to have the title and the url')
@@ -63,10 +62,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-      setNotification('log in successful')
-      setTimeout(() => {
-        setNotification(null)
-      }, 5000)
+      dispatch(createNotification('log in successful'))
     } catch (expection) {
       setErrorMessage('wrong username or password')
       setTimeout(() => {
@@ -96,10 +92,7 @@ const App = () => {
       .update(id, changedBlog, blog.user.name)
       .then((returnedBlog) => {
         setBlogs(blogs.map((blog) => (blog.id !== id ? blog : returnedBlog)))
-        setNotification(`${blog.title} liked`)
-        setTimeout(() => {
-          setNotification(null)
-        }, 5000)
+        dispatch(createNotification(`${blog.title} liked`))
       })
       .catch(() => {
         setErrorMessage('error with liking the blog')
@@ -118,10 +111,7 @@ const App = () => {
         .deleteBlog(id)
         .then(() => {
           setBlogs((oldBlogs) => oldBlogs.filter(({ id }) => id !== blog.id))
-          setNotification(`${blog.title} deleted`)
-          setTimeout(() => {
-            setNotification(null)
-          }, 5000)
+          dispatch(createNotification())
         })
         .catch(() => {
           setErrorMessage('error deleting the blog')
@@ -168,7 +158,7 @@ const App = () => {
   return (
     <div>
       <Error message={errorMessage} />
-      <Notification message={notification} />
+      <Notification />
       {user === null ? (
         loginForm()
       ) : (
