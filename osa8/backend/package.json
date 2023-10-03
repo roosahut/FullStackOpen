@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for fullstack open part 8",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Roosa Huttunen",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.9.3",
+    "graphql": "^16.8.1",
+    "nodemon": "^3.0.1"
+  }
+}
